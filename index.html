@@ -1,0 +1,459 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f8f5ef">
+  <meta name="description" content="A draft, human-led scaffold for organizing public storefront evidence and questions for qualified review. Not a compliance certification or legal advice.">
+  <title>AI Compliance Store Review — Draft Pack</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #f8f5ef;
+      --card: #fffdf9;
+      --ink: #172a3a;
+      --muted: #536575;
+      --line: #dedbd2;
+      --teal: #126b67;
+      --teal-dark: #0d504d;
+      --coral: #e46f52;
+      --gold: #f0c568;
+      --blue-wash: #e8f0ec;
+      --shadow: 0 16px 42px rgba(23, 42, 58, .08);
+      --radius: 22px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+    }
+    a { color: var(--teal-dark); text-underline-offset: .2em; }
+    a:hover { color: #963e2e; }
+    a:focus-visible { outline: 3px solid var(--coral); outline-offset: 4px; border-radius: 4px; }
+    .wrap { width: min(1120px, calc(100% - 40px)); margin-inline: auto; }
+    .skip-link { position: absolute; left: -9999px; top: 8px; z-index: 20; background: white; padding: 10px 14px; }
+    .skip-link:focus { left: 8px; }
+    .draft-bar {
+      background: var(--ink);
+      color: #fffaf0;
+      text-align: center;
+      padding: 9px 16px;
+      font-size: .79rem;
+      font-weight: 800;
+      letter-spacing: .095em;
+    }
+    header { padding: 18px 0; }
+    .nav { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .brand { color: var(--ink); text-decoration: none; display: inline-flex; align-items: center; gap: 11px; font-weight: 850; letter-spacing: -.025em; }
+    .brand img { width: 36px; height: 36px; }
+    .nav-links { display: flex; flex-wrap: wrap; gap: 20px; font-size: .92rem; font-weight: 650; }
+    .nav-links a { color: var(--ink); text-decoration: none; }
+    .hero { padding: 38px 0 70px; }
+    .hero-grid { display: grid; grid-template-columns: 1.04fr .96fr; gap: 46px; align-items: center; }
+    .eyebrow { color: var(--teal-dark); text-transform: uppercase; letter-spacing: .13em; font-size: .78rem; font-weight: 850; }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 { max-width: 690px; margin: 13px 0 18px; font-size: clamp(2.65rem, 6vw, 5.1rem); line-height: .99; letter-spacing: -.065em; }
+    .hero-copy { max-width: 600px; color: var(--muted); font-size: clamp(1.05rem, 2vw, 1.19rem); }
+    .hero-copy strong { color: var(--ink); }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin: 26px 0 16px; }
+    .button { display: inline-flex; justify-content: center; align-items: center; min-height: 48px; padding: 11px 17px; border: 2px solid var(--teal); border-radius: 999px; background: var(--teal); color: white; text-decoration: none; font-weight: 780; }
+    .button:hover { background: var(--teal-dark); border-color: var(--teal-dark); color: white; }
+    .button.secondary { background: transparent; color: var(--ink); border-color: var(--line); }
+    .button.secondary:hover { border-color: var(--teal); color: var(--teal-dark); }
+    .microcopy { color: var(--muted); font-size: .88rem; }
+    .hero-art { margin: 0; padding: 14px; background: var(--card); border: 1px solid var(--line); border-radius: 30px; box-shadow: var(--shadow); transform: rotate(1deg); }
+    .hero-art img { display: block; width: 100%; height: auto; border-radius: 20px; }
+    figcaption { padding: 10px 5px 1px; color: var(--muted); font-size: .82rem; }
+    .section { padding: 68px 0; }
+    .section.alt { background: #eeeae1; }
+    .section-heading { max-width: 690px; margin-bottom: 30px; }
+    h2 { margin-bottom: 10px; font-size: clamp(2rem, 4vw, 3.1rem); letter-spacing: -.05em; line-height: 1.07; }
+    .section-heading p { color: var(--muted); font-size: 1.05rem; margin-bottom: 0; }
+    .three-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .card { overflow: hidden; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: 0 8px 24px rgba(23, 42, 58, .045); }
+    .card img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; background: var(--blue-wash); }
+    .card-copy { padding: 21px; }
+    .card h3 { margin-bottom: 8px; font-size: 1.15rem; letter-spacing: -.02em; }
+    .card p { margin: 0; color: var(--muted); font-size: .94rem; }
+    .layers { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+    .layer { display: grid; grid-template-columns: 48px 1fr; gap: 14px; align-items: start; padding: 20px; border: 1px solid var(--line); border-radius: 18px; background: var(--card); }
+    .layer-badge { width: 42px; height: 42px; display: grid; place-items: center; border-radius: 14px; background: var(--blue-wash); color: var(--teal-dark); font-weight: 900; }
+    .layer h3 { margin: 0 0 4px; font-size: 1.06rem; }
+    .layer p { margin: 0 0 8px; color: var(--muted); font-size: .9rem; }
+    .layer a { font-size: .89rem; font-weight: 750; }
+    .ratings { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    .rating { padding: 17px; background: var(--card); border: 1px solid var(--line); border-radius: 16px; }
+    .rating strong { display: block; margin-bottom: 5px; font-size: .9rem; letter-spacing: .06em; }
+    .rating span { display: block; color: var(--muted); font-size: .84rem; line-height: 1.5; }
+    .rating:nth-child(1) strong { color: var(--teal-dark); }
+    .rating:nth-child(2) strong { color: #93640a; }
+    .rating:nth-child(3) strong { color: #a54f29; }
+    .rating:nth-child(4) strong { color: #9a392e; }
+    .note { margin-top: 18px; padding: 16px 18px; border-left: 4px solid var(--coral); border-radius: 0 12px 12px 0; background: #fff7ed; color: #4e4038; font-size: .93rem; }
+    [hidden] { display: none !important; }
+    .support-lock { max-width: 760px; padding: 22px; border: 1px solid var(--line); border-radius: 18px; background: var(--card); }
+    .support-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+    .support-card { padding: 22px; border: 1px solid var(--line); border-radius: 18px; background: var(--card); box-shadow: 0 8px 24px rgba(23, 42, 58, .045); }
+    .support-card h3 { margin-bottom: 8px; font-size: 1.12rem; }
+    .support-card p { color: var(--muted); font-size: .92rem; }
+    .support-card hr { margin: 20px 0; border: 0; border-top: 1px solid var(--line); }
+    .support-card iframe { max-width: 100%; }
+    .support-card .button { margin: 2px 0 10px; }
+    button.button { font: inherit; cursor: pointer; }
+    .support-disclosure { margin-top: 18px; }
+    dialog.age-gate { width: min(92vw, 470px); padding: 25px; border: 1px solid var(--line); border-radius: 18px; background: var(--card); color: var(--ink); box-shadow: 0 24px 70px rgba(23, 42, 58, .28); }
+    dialog.age-gate::backdrop { background: rgba(23, 42, 58, .66); backdrop-filter: blur(3px); }
+    dialog.age-gate h2 { margin-bottom: 9px; font-size: 1.5rem; }
+    dialog.age-gate p { color: var(--muted); }
+    .age-check { display: flex; gap: 10px; align-items: flex-start; margin: 18px 0; padding: 14px; border: 1px solid var(--line); border-radius: 12px; background: #f5f2eb; cursor: pointer; }
+    .age-check input { margin-top: 5px; accent-color: var(--teal); }
+    .age-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+    .age-actions .button { min-width: 120px; }
+    .age-actions .button:disabled { opacity: .5; cursor: not-allowed; }
+    .footer-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; border-top: 1px solid var(--line); padding-top: 24px; }
+    .footer-grid h3 { margin-bottom: 8px; color: var(--ink); font-size: .96rem; }
+    .footer-grid ul { margin: 0; padding: 0; list-style: none; }
+    .footer-grid li { margin: 5px 0; overflow-wrap: anywhere; }
+    .footer-meta { display: flex; justify-content: space-between; gap: 24px; align-items: flex-start; margin-top: 25px; padding-top: 20px; border-top: 1px solid var(--line); }
+    .footer-meta p { max-width: 780px; margin: 0; }
+    .footer-meta p + p { max-width: 300px; }
+    .last-callout { display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: center; padding: 28px; border-radius: 24px; background: var(--ink); color: white; }
+    .last-callout h2 { margin: 0 0 7px; font-size: clamp(1.8rem, 3.6vw, 2.6rem); }
+    .last-callout p { max-width: 690px; margin: 0; color: #d8e0e2; }
+    .last-callout .button { background: var(--gold); border-color: var(--gold); color: var(--ink); white-space: nowrap; }
+    .last-callout .button:hover { background: #ffda83; border-color: #ffda83; }
+    footer { padding: 34px 0 45px; color: var(--muted); font-size: .86rem; }
+    .footer-row { display: flex; justify-content: space-between; gap: 20px; align-items: start; border-top: 1px solid var(--line); padding-top: 22px; }
+    footer strong { color: var(--ink); }
+    footer p { max-width: 780px; margin: 0; }
+    @media (max-width: 800px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 28px; }
+      .hero { padding-top: 25px; }
+      .hero-art { max-width: 620px; margin-inline: auto; }
+      .three-grid { grid-template-columns: 1fr 1fr; }
+      .three-grid .card:last-child { grid-column: 1 / -1; }
+      .ratings { grid-template-columns: 1fr 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 560px) {
+      .wrap { width: min(100% - 28px, 1120px); }
+      header { padding: 14px 0; }
+      .nav { align-items: flex-start; }
+      .nav-links { gap: 9px 13px; justify-content: flex-end; font-size: .82rem; }
+      .brand span { max-width: 118px; line-height: 1.15; }
+      .hero { padding-bottom: 48px; }
+      .section { padding: 48px 0; }
+      .three-grid, .layers, .ratings, .support-grid { grid-template-columns: 1fr; }
+      .three-grid .card:last-child { grid-column: auto; }
+      .last-callout { grid-template-columns: 1fr; padding: 23px; }
+      .last-callout .button { justify-self: start; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 18px; }
+      .footer-meta { display: block; }
+      .footer-meta p + p { margin-top: 12px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="draft-bar">DRAFT ONLY · NOT APPROVED · NOT ADOPTED</div>
+  <header>
+    <nav class="nav wrap" aria-label="Main navigation">
+      <a class="brand" href="index.html" aria-label="AI Compliance Store Review draft pack home">
+        <img src="assets/favicon.svg" alt="" width="36" height="36">
+        <span>Store Review<br>Draft Pack</span>
+      </a>
+      <div class="nav-links">
+          <a href="#how-it-works">How it works</a>
+          <a href="#review-layers">Review layers</a>
+          <a href="#support">Support</a>
+          <a href="README.md">Read the pack</a>
+      </div>
+    </nav>
+  </header>
+  <main id="main">
+    <section class="hero wrap" aria-labelledby="hero-title">
+      <div class="hero-grid">
+        <div>
+          <div class="eyebrow">A human-led checklist scaffold</div>
+          <h1 id="hero-title">Less checklist spaghetti.</h1>
+          <p class="hero-copy"><strong>More traceable evidence.</strong> A working scaffold for organizing public storefront observations and questions for qualified review—not a compliance verdict, legal opinion, or promise of platform approval.</p>
+          <div class="hero-actions">
+            <a class="button" href="#review-layers">Explore the draft</a>
+            <a class="button secondary" href="docs/evidence-guide.md">See the evidence guide</a>
+          </div>
+          <p class="microcopy">No real store has been graded. This draft is not ready for live decisions.</p>
+        </div>
+        <figure class="hero-art">
+          <img src="assets/promo-evidence-tangle.png" alt="Cartoon shopkeeper comically sorting a swirl of blank policy cards with a magnifying glass and checklist">
+          <figcaption>When the paperwork pile grows legs, start by organizing what you actually observed.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section alt" id="how-it-works" aria-labelledby="how-title">
+      <div class="wrap">
+        <div class="section-heading">
+          <div class="eyebrow">What this is—and isn't</div>
+          <h2 id="how-title">A checklist, not an autopilot.</h2>
+          <p>The pack is designed to help a human reviewer keep observations bounded, evidence traceable, and open questions visible.</p>
+        </div>
+        <div class="three-grid">
+          <article class="card">
+            <img src="assets/promo-evidence-sleuth.png" alt="Cartoon shop owner using a huge magnifying glass to inspect a small blank checkout label">
+            <div class="card-copy">
+              <h3>Look for observable evidence</h3>
+              <p>Record what was seen, where it came from, and when it was checked. Missing or uncertain evidence stays visible.</p>
+            </div>
+          </article>
+          <article class="card">
+            <img src="assets/promo-human-review.png" alt="Friendly robot pauses before stamping while a human reviewer points to an evidence folder">
+            <div class="card-copy">
+              <h3>Keep a human in the loop</h3>
+              <p>Legal interpretation, policy ambiguity, and live changes belong with qualified human review—not an automatic stamp.</p>
+            </div>
+          </article>
+          <article class="card">
+            <div class="card-copy">
+              <h3>Leave room for “not assessed”</h3>
+              <p>Do not infer a pass from silence, a badge, or one screenshot. Check current official sources before relying on any future finding.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="review-layers" aria-labelledby="layers-title">
+      <div class="wrap">
+        <div class="section-heading">
+          <div class="eyebrow">Four draft layers</div>
+          <h2 id="layers-title">A place for each kind of question.</h2>
+          <p>These are prompts for review, not statements of current platform rules or legal requirements.</p>
+        </div>
+        <div class="layers">
+          <article class="layer">
+            <div class="layer-badge" aria-hidden="true">A</div>
+            <div><h3>Payment-related storefront evidence</h3><p>Public pages and payment-flow observations to verify against current official sources.</p><a href="checklists/layer-a-stripe.md">Open Layer A checklist →</a></div>
+          </article>
+          <article class="layer">
+            <div class="layer-badge" aria-hidden="true">B</div>
+            <div><h3>Advertising, commerce &amp; data use</h3><p>Prompts for storefront, advertising, commerce, and data-use evidence.</p><a href="checklists/layer-b-meta.md">Open Layer B checklist →</a></div>
+          </article>
+          <article class="layer">
+            <div class="layer-badge" aria-hidden="true">C</div>
+            <div><h3>Paid-access decisions</h3><p>Unresolved product-access and disclosure decisions; no paywall is configured.</p><a href="checklists/layer-c-paid-gate.md">Open Layer C checklist →</a></div>
+          </article>
+          <article class="layer">
+            <div class="layer-badge" aria-hidden="true">D</div>
+            <div><h3>Other compliance prompts</h3><p>Jurisdiction-dependent consumer, privacy, product, accessibility, and sector questions.</p><a href="checklists/layer-d-other-compliance.md">Open Layer D checklist →</a></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt" aria-labelledby="ratings-title">
+      <div class="wrap">
+        <div class="section-heading">
+          <div class="eyebrow">Draft reporting vocabulary</div>
+          <h2 id="ratings-title">No points. No averaging.</h2>
+          <p>The draft uses four descriptive outcomes. Each needs evidence and human judgment; none is a certification.</p>
+        </div>
+        <div class="ratings">
+          <div class="rating"><strong>CLEAR</strong><span>Evidence supports in-scope items; still not a certification or guarantee.</span></div>
+          <div class="rating"><strong>CONDITIONAL</strong><span>A material question, evidence gap, or condition remains unresolved.</span></div>
+          <div class="rating"><strong>AT RISK</strong><span>Evidence suggests an issue needing prompt human attention.</span></div>
+          <div class="rating"><strong>BLOCKED</strong><span>A verified hard stop requires current authoritative evidence and human confirmation.</span></div>
+        </div>
+        <div class="note"><strong>Important:</strong> With no evidence reviewed, do not fill the gap with assumptions. Report “Not assessed” or stop for incomplete scope. <a href="docs/rating-rules.md">Read the draft rating rules</a>.</div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="last-callout">
+          <div>
+            <h2>Keep the open decisions open.</h2>
+            <p>Repository name, visibility, license, first store to review, paid-access choice, and approval of the draft remain unresolved. A license file is intentionally not included.</p>
+          </div>
+          <a class="button" href="README.md">Review decisions &amp; safe use</a>
+        </div>
+      </div>
+    </section>
+    <section class="section alt" id="support" aria-labelledby="support-title">
+      <div class="wrap">
+        <div class="section-heading">
+          <div class="eyebrow">Support · 18+</div>
+          <h2 id="support-title">Support the work—without buying a verdict.</h2>
+          <p>Support is optional and separate from the review tool. The supporter links may lead to third-party pages with their own terms and content restrictions. The age prompt below is self-attestation only; this static draft does not verify identity, age, or location.</p>
+        </div>
+        <div class="support-lock" id="supportLock">
+          <p>Supporter options are hidden until you confirm you are at least 18 (or the age of majority where you live).</p>
+          <button class="button" id="openSupportGate" type="button">View supporter options (18+)</button>
+        </div>
+        <div class="support-grid" id="supportOptions" hidden>
+          <article class="support-card">
+            <h3>Recurring support · PayPal</h3>
+            <p>Review the amount, billing frequency, and cancellation terms shown by PayPal before subscribing. Those terms are set in the linked PayPal plan.</p>
+            <div id="paypal-button-container-P-4FD24238VX4902214NK2XP2Y" aria-label="PayPal subscription button"></div>
+            <p class="microcopy" id="paypalStatus" role="status" aria-live="polite"></p>
+            <hr>
+            <h3>One-time tips · Ko-fi</h3>
+            <a class="button secondary" href="https://ko-fi.com/fedpromptly" target="_blank" rel="noopener noreferrer">Support on Ko-fi</a>
+            <p class="microcopy">The optional Ko-fi support button is also shown after you open this 18+ section.</p>
+          </article>
+          <article class="support-card">
+            <h3>Memberships and sponsorships</h3>
+            <p>These are independent third-party support options. Check each provider’s terms before joining.</p>
+            <p><a class="button secondary" href="https://www.patreon.com/checkout/16145898/28759937?client_id=yieuxJary8ZL-f8_KU2x6CLgr8nrI8W61ttU1yzFIpPl4KhhtqsjGDWTKdh0e-gx&amp;state=05d4a8d93af762ab4aa99e75678389c6&amp;response_type=code&amp;amt=5.0&amp;pledge_insufficient=True&amp;redirect_uri=https%3A%2F%2Fwww.patreon.com%2Foauth2%2Fbecome-patron%3Fredirect_uri%3Dhttps%253A%252F%252Fgithub.com%252Fsponsors%252Faccounts%252Fpatreon%26client_id%3DyieuxJary8ZL-f8_KU2x6CLgr8nrI8W61ttU1yzFIpPl4KhhtqsjGDWTKdh0e-gx%26min_cents%3D500%26campaign_id%3D16145898%26response_type%3Dcode%26state%3D05d4a8d93af762ab4aa99e75678389c6%26scope%3Didentity%2Bidentity%255Bemail%255D%2Bcampaigns%2Bw%253Acampaigns.webhook%2Bcampaigns.members&amp;start_flow=become_patron&amp;scope=identity+identity%5Bemail%5D+campaigns+w%3Acampaigns.webhook+campaigns.members" target="_blank" rel="noopener noreferrer">Continue to Patreon checkout</a></p>
+            <p><iframe src="https://github.com/sponsors/Git-FED/button" title="Sponsor Git-FED on GitHub" height="32" width="114" style="border: 0; border-radius: 6px" loading="lazy"></iframe></p>
+          </article>
+        </div>
+        <div class="note support-disclosure"><strong>Important:</strong> A donation or subscription does not unlock the review tool, grant a compliance verdict, or mean this draft has been approved. Whether the tool itself is paid-gated remains undecided.</div>
+        <dialog id="supportAgeGate" class="age-gate" aria-labelledby="supportAgeTitle">
+          <h2 id="supportAgeTitle">Age affirmation</h2>
+          <p>Some linked supporter pages may contain adult-oriented material or apply their own age limits. This checkbox is a self-attestation only; it does not verify your age or location.</p>
+          <label class="age-check" for="supportAgeCheck">
+            <input id="supportAgeCheck" type="checkbox">
+            <span>I confirm I am at least 18 years old, or the age of majority where I live, and may view the linked material.</span>
+          </label>
+          <div class="age-actions">
+            <button class="button" id="confirmSupportAge" type="button" disabled>Continue</button>
+            <button class="button secondary" id="cancelSupportAge" type="button">Cancel</button>
+          </div>
+        </dialog>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <div class="wrap footer-grid">
+      <section aria-labelledby="footer-fed-os"><h3 id="footer-fed-os">FED-OS</h3><ul>
+        <li><a href="https://www.fedpromptly.org" target="_blank" rel="noopener noreferrer">Explore the ecosystem</a></li>
+        <li><a href="https://www.fedpromptly.com/aid" target="_blank" rel="noopener noreferrer">Join FED-OS membership</a></li>
+        <li><a href="https://www.jabburr.com/fed-os" target="_blank" rel="noopener noreferrer">Storefront</a></li>
+        <li><a href="https://whop.com/fedpromptly/" target="_blank" rel="noopener noreferrer">Whop</a></li>
+      </ul></section>
+      <section aria-labelledby="footer-contact"><h3 id="footer-contact">Contact</h3><ul>
+        <li><a href="mailto:contact@fedpromptly.com">General</a></li>
+        <li><a href="mailto:support@fedpromptly.com">Support</a></li>
+        <li><a href="mailto:business@fedpromptly.com">Business</a></li>
+      </ul></section>
+      <section aria-labelledby="footer-media"><h3 id="footer-media">Media</h3><ul>
+        <li><a href="https://substack.com/@fedpromptly" target="_blank" rel="noopener noreferrer">FEDpromptly articles</a></li>
+        <li><a href="https://fedpromptly.wordpress.com/" target="_blank" rel="noopener noreferrer">FEDpromptly blog</a></li>
+        <li><a href="https://gitfed.substack.com/" target="_blank" rel="noopener noreferrer">GitFed blog</a></li>
+        <li><a href="https://www.deviantart.com/fedpromptly" target="_blank" rel="noopener noreferrer">Artwork</a></li>
+        <li><a href="https://bsky.app/profile/fed-os.bsky.social" target="_blank" rel="noopener noreferrer">Bluesky</a> · <a href="https://x.com/Fedpromptly" target="_blank" rel="noopener noreferrer">X</a></li>
+      </ul></section>
+      <section aria-labelledby="footer-support"><h3 id="footer-support">Support &amp; community</h3><ul>
+        <li><a href="#support">Support options (18+)</a></li>
+        <li><a href="https://discord.gg/Jm4XStx4Pf" target="_blank" rel="noopener noreferrer">Developers Discord</a></li>
+        <li><a href="private-communities.html">Private Communities (18+)</a></li>
+      </ul></section>
+    </div>
+    <div class="wrap footer-meta">
+      <p><strong>DRAFT ONLY — NOT APPROVED OR ADOPTED.</strong> Informational workflow material—not legal, tax, privacy, security, payments, or advertising advice. It does not guarantee compliance, eligibility, approval, or processing. Verify current official sources and obtain qualified advice before relying on any finding.</p>
+      <p><a href="docs/classification-gates.md">Classification gates</a> · <a href="WEB-HOSTING.md">Hosting notes</a></p>
+    </div>
+  </footer>
+  <script>
+    (() => {
+      const gate = document.getElementById('supportAgeGate');
+      const openButton = document.getElementById('openSupportGate');
+      const check = document.getElementById('supportAgeCheck');
+      const confirmButton = document.getElementById('confirmSupportAge');
+      const cancelButton = document.getElementById('cancelSupportAge');
+      const lockedPanel = document.getElementById('supportLock');
+      const optionsPanel = document.getElementById('supportOptions');
+      const paypalStatus = document.getElementById('paypalStatus');
+      let paypalLoading = false;
+      let kofiLoading = false;
+
+      function loadPayPal() {
+        if (window.paypal) return renderPayPal();
+        if (paypalLoading) return;
+        paypalLoading = true;
+        const script = document.createElement('script');
+        script.src = 'https://www.paypal.com/sdk/js?client-id=BAA_ndqaWMyQwTnDZ0LXwLQ22jdJo9uxkeXYqmBbF-hD41HMiZ83mvOcx1Kti0b6ZfXfje7Q1ievNaS8Ok&vault=true&intent=subscription';
+        script.dataset.sdkIntegrationSource = 'button-factory';
+        script.onload = renderPayPal;
+        script.onerror = () => { paypalStatus.textContent = 'PayPal could not be loaded. You can try again later.'; };
+        document.head.appendChild(script);
+      }
+
+      function renderPayPal() {
+        if (!window.paypal) {
+          paypalStatus.textContent = 'PayPal is unavailable right now.';
+          return;
+        }
+        window.paypal.Buttons({
+          style: { shape: 'rect', color: 'gold', layout: 'vertical', label: 'subscribe' },
+          createSubscription: (data, actions) => actions.subscription.create({
+            plan_id: 'P-4FD24238VX4902214NK2XP2Y',
+            quantity: 1
+          }),
+          onApprove: () => {
+            paypalStatus.textContent = 'PayPal confirmed the subscription. Keep the confirmation from PayPal for your records.';
+          },
+          onCancel: () => {
+            paypalStatus.textContent = 'The PayPal subscription was canceled before completion.';
+          },
+          onError: () => {
+            paypalStatus.textContent = 'PayPal could not complete this request. Check with PayPal before trying again.';
+          }
+        }).render('#paypal-button-container-P-4FD24238VX4902214NK2XP2Y').catch(() => {
+          paypalStatus.textContent = 'The PayPal button could not be displayed. Please try again later.';
+        });
+      }
+
+      function loadKofiWidget() {
+        if (kofiLoading) return;
+        kofiLoading = true;
+        const script = document.createElement('script');
+        script.src = 'https://storage.ko-fi.com/cdn/scripts/overlay-widget.js';
+        script.onload = () => {
+          if (window.kofiWidgetOverlay) {
+            window.kofiWidgetOverlay.draw('fedpromptly', {
+              type: 'floating-chat',
+              'floating-chat.donateButton.text': 'Support me',
+              'floating-chat.donateButton.background-color': '#00b9fe',
+              'floating-chat.donateButton.text-color': '#fff'
+            });
+          }
+        };
+        document.body.appendChild(script);
+      }
+
+      openButton.addEventListener('click', () => {
+        check.checked = false;
+        confirmButton.disabled = true;
+        gate.showModal();
+      });
+      check.addEventListener('change', () => { confirmButton.disabled = !check.checked; });
+      confirmButton.addEventListener('click', () => {
+        if (!check.checked) return;
+        gate.close();
+        lockedPanel.hidden = true;
+        optionsPanel.hidden = false;
+        loadPayPal();
+        loadKofiWidget();
+        optionsPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+      cancelButton.addEventListener('click', () => {
+        gate.close();
+        openButton.focus();
+      });
+      gate.addEventListener('click', (event) => {
+        if (event.target === gate) gate.close();
+      });
+    })();
+  </script>
+</body>
+</html>
